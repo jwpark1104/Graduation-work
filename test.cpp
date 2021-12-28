@@ -1,28 +1,47 @@
-#include <stdio.h>
- 
-int main(void){
+#include <iostream>
+#include <string.h>
 
-	int array[][5] ={
-		{1,2,3,4,5},
-		{6,7,8,9,10},
-		{11,12,13,14,15},
-		{16,17,18,19,20},
-		{21,22,23,24,25}
-	};
-	
-	int i,j;
-	for(i=0;i<5;i++){
-		for(j=0;j<5;j++)
-			printf("%3d",array[i][j]);
-		printf("\n");
-	}
-	
-	printf("   ↓\n");
-	
-	for (i=0;i<5;i++){
-		for(j=4;j>=0;j--)
-			printf("%3d",array[j][i]);
-		printf("\n");
-	}
-	return 0;
-};
+using namespace std;
+
+#define N 5
+
+int arr[N][N], temp_arr[N][N];
+
+void init(){
+    
+    for(int i=0; i<N; i++)
+        for(int j=0; j<N; j++)
+      
+            arr[i][j] = i*5 + j+1;
+            
+}
+
+void print_arr(){
+    
+    for(int i=0; i<N; i++){
+        for(int j=0; j<N; j++){
+            cout.width(2);
+            cout << arr[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+    
+}
+
+int main()
+{
+    init();
+    
+    print_arr();
+    
+    // 배열 90도 회전
+    for(int i=0; i<N; i++)
+        for(int j=0; j<N; j++)
+            temp_arr[i][j] = arr[N - j -1][i];
+    
+    // 배열 값 복사
+    memmove(arr, temp_arr, sizeof(arr));
+    
+    print_arr();
+}
